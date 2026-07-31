@@ -79,13 +79,13 @@ h3{font-family:var(--serif);font-weight:560;font-size:21px;line-height:1.25;marg
 
 /* ---------- THE HOMES (signature) ---------- */
 .homes-intro{max-width:660px}
-.ridge{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;align-items:end;margin-top:64px}
+.ridge{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;align-items:end;margin-top:64px}
 .home{display:flex;flex-direction:column}
 .home .ph{position:relative;overflow:hidden;background:var(--ink-soft)}
 .home .ph img{width:100%;height:100%;object-fit:cover;filter:saturate(1.05) contrast(1.04);transition:transform .8s ease}
 .home:hover .ph img{transform:scale(1.035)}
 /* gable + arch silhouettes, heights rise with square footage */
-.home.h-dome .ph{clip-path:ellipse(120% 100% at 50% 100%);height:330px;border-radius:0}
+.home.h-dome .ph{clip-path:ellipse(120% 100% at 50% 100%);height:440px;border-radius:0}
 .home.h-688 .ph{clip-path:polygon(50% 0,100% 17%,100% 100%,0 100%,0 17%);height:360px}
 .home.h-888 .ph{clip-path:polygon(50% 0,100% 21%,100% 100%,0 100%,0 21%);height:400px}
 .home.h-1111 .ph{clip-path:polygon(50% 0,100% 25%,100% 100%,0 100%,0 25%);height:440px}
@@ -165,7 +165,7 @@ tr.tot td{font-weight:600;border-top-width:2px}
   .split,.cols2,.team{grid-template-columns:1fr}
   .chips,.grid3{grid-template-columns:1fr}
   .ridge{grid-template-columns:1fr 1fr;gap:20px}
-  .home.h-dome .ph{height:280px}.home.h-688 .ph{height:300px}.home.h-888 .ph{height:330px}.home.h-1111 .ph{height:360px}
+  .home.h-dome .ph{height:360px}.home.h-688 .ph{height:300px}.home.h-888 .ph{height:330px}
 }
 @media(max-width:540px){
   .ridge{grid-template-columns:1fr}
@@ -187,7 +187,7 @@ tr.tot td{font-weight:600;border-top-width:2px}
     <div class="hero-stats">
       <div class="hstat"><b class="tnum">75</b><span>Private Homes</span></div>
       <div class="hstat"><b class="tnum">9 acres</b><span>Single-Purpose LLC</span></div>
-      <div class="hstat"><b class="tnum">$27.1M</b><span>Stabilized Value</span></div>
+      <div class="hstat"><b class="tnum">$23.7M</b><span>Stabilized Value</span></div>
       <div class="hstat"><b class="tnum">408</b><span>On the Waitlist</span></div>
     </div>
   </div>
@@ -224,22 +224,13 @@ tr.tot td{font-weight:600;border-top-width:2px}
   <div class="wrap rv">
     <p class="eyebrow"><span class="num">02</span> The Residences</p>
     <h2 class="homes-intro">75 homes on <em>sacred geometry,</em> for intentional living.</h2>
-    <p class="lede">Four home types — from a private dome to a full family cabin — set on sacred geometry and anchored by the 13 Oracle Angel Stations: trails, sculptural art, crystal installations, and an organic farm. Every lease includes WiFi and water.</p>
+    <p class="lede">Three home types — from a modern cabin to a two-bedroom dome — set on sacred geometry and anchored by the 13 Oracle Angel Stations: trails, sculptural art, crystal installations, and an organic farm. Every lease includes WiFi and water.</p>
 
     <div class="ridge">
-      <div class="home h-dome">
-        <div class="ph"><img src="images/dome.jpg" alt="Black shingled geodesic dome home with a glass front on a raised deck"></div>
-        <div class="meta">
-          <p class="qty">15 Homes</p>
-          <h3>The Dome</h3>
-          <p class="specs">Signature geodesic residence · deck-set</p>
-          <p class="rent tnum">$3,000<span> / mo</span></p>
-        </div>
-      </div>
       <div class="home h-688">
         <div class="ph"><img src="images/modern-cabin-688.jpg" alt="Cedar modern cabin with clerestory windows and a wildflower deck garden"></div>
         <div class="meta">
-          <p class="qty">15 Homes</p>
+          <p class="qty">25 Homes</p>
           <h3>The Modern Cabin</h3>
           <p class="specs">688 sq ft · 1 bed · full kitchen &amp; bath</p>
           <p class="rent tnum">$2,500<span> / mo</span></p>
@@ -254,18 +245,18 @@ tr.tot td{font-weight:600;border-top-width:2px}
           <p class="rent tnum">$3,000<span> / mo</span></p>
         </div>
       </div>
-      <div class="home h-1111">
-        <div class="ph"><img src="images/grand-cabin-1111.jpg" alt="Black gable cabin with a covered cedar porch at dusk"></div>
+      <div class="home h-dome">
+        <div class="ph"><img src="images/dome.jpg" alt="Geodesic dome residences at golden hour"></div>
         <div class="meta">
           <p class="qty">25 Homes</p>
-          <h3>The Grand Cabin</h3>
-          <p class="specs">1,111 sq ft · covered porch · family-sized</p>
+          <h3>The Dome</h3>
+          <p class="specs">1,050 sq ft · 2 bed + loft · deck-set</p>
           <p class="rent tnum">$3,300<span> / mo</span></p>
         </div>
       </div>
     </div>
 
-    <p class="homes-note"><b>$240,000/mo</b> gross at full lease · 12-month leases · 95% stabilized occupancy. Residency includes the Core Team: annual comprehensive bloodwork, monthly IV drip therapy, every morning &amp; evening class, and 15% off food &amp; longevity services.</p>
+    <p class="homes-note"><b>$220,000/mo</b> gross at full lease · 12-month leases · 95% stabilized occupancy. Residency includes the Core Team: annual comprehensive bloodwork, monthly IV drip therapy, every morning &amp; evening class, and 15% off food &amp; longevity services.</p>
   </div>
 </section>
 
@@ -290,30 +281,30 @@ tr.tot td{font-weight:600;border-top-width:2px}
 <section>
   <div class="wrap rv">
     <p class="eyebrow"><span class="num">04</span> The Economics · Built Lean</p>
-    <h2>75 homes, built for <em>$7.4M</em> — a ~$10.9M raise.</h2>
+    <h2>75 homes, built for <em>$6.6M</em> — a ~$10.1M raise.</h2>
     <div class="cols2">
       <div>
         <p class="tbl-cap">Cost per home · by type</p>
         <table>
           <tr><th>Home</th><th class="n">Qty</th><th class="n">Per Unit</th><th class="n">Total</th></tr>
-          <tr><td>Dome</td><td class="n">15</td><td class="n">$99,300</td><td class="n">$1.49M</td></tr>
-          <tr><td>Modern Cabin · 688 sf</td><td class="n">15</td><td class="n">$75,225</td><td class="n">$1.13M</td></tr>
+          <tr><td>Dome · 1,050 sf · 2 bed + loft</td><td class="n">25</td><td class="n">$99,300</td><td class="n">$2.48M</td></tr>
+          <tr><td>Modern Cabin · 688 sf</td><td class="n">25</td><td class="n">$75,225</td><td class="n">$1.88M</td></tr>
           <tr><td>A-Frame · 888 sf</td><td class="n">25</td><td class="n">$88,500</td><td class="n">$2.21M</td></tr>
-          <tr><td>Grand Cabin · 1,111 sf</td><td class="n">25</td><td class="n">$101,775</td><td class="n">$2.54M</td></tr>
-          <tr class="tot"><td>Vertical construction</td><td class="n">75</td><td class="n">~$100/sf avg</td><td class="n">$7.37M</td></tr>
+          
+          <tr class="tot"><td>Vertical construction</td><td class="n">75</td><td class="n">~$100/sf avg</td><td class="n">$6.57M</td></tr>
         </table>
       </div>
       <div>
         <p class="tbl-cap">The raise · one build</p>
         <table>
-          <tr><td>75 homes (vertical)</td><td class="n">$7.37M</td></tr>
+          <tr><td>75 homes (vertical)</td><td class="n">$6.57M</td></tr>
           <tr><td>Site, trails, lighting, pads</td><td class="n">$1.70M</td></tr>
           <tr><td>Surface parking (resident)</td><td class="n">$0.30M</td></tr>
           <tr><td>Soft costs (design, permits)</td><td class="n">$0.80M</td></tr>
-          <tr><td>Contingency (~8%)</td><td class="n">$0.73M</td></tr>
-          <tr class="tot"><td>Total construction raise</td><td class="n">~$10.9M</td></tr>
+          <tr><td>Contingency (~8%)</td><td class="n">$0.75M</td></tr>
+          <tr class="tot"><td>Total construction raise</td><td class="n">~$10.1M</td></tr>
           <tr><td>Land — 70% share of the $10M parcel (pre-yr 8)</td><td class="n">$7.0M</td></tr>
-          <tr class="tot"><td>True all-in at stabilization</td><td class="n">~$17.9M</td></tr>
+          <tr class="tot"><td>True all-in at stabilization</td><td class="n">~$17.1M</td></tr>
         </table>
       </div>
     </div>
@@ -324,17 +315,17 @@ tr.tot td{font-weight:600;border-top-width:2px}
 <section class="band-light">
   <div class="wrap rv">
     <p class="eyebrow"><span class="num">05</span> The Economics · Valued High</p>
-    <h2>$1.84M stabilized NOI · <em>$27.1M</em> value.</h2>
+    <h2>$1.61M stabilized NOI · <em>$23.7M</em> value.</h2>
     <div class="cols2">
       <div>
         <p class="tbl-cap">Stabilized monthly revenue</p>
         <table>
-          <tr><td>15 Domes @ $3,000</td><td class="n">$45,000</td></tr>
-          <tr><td>15 Modern Cabins @ $2,500</td><td class="n">$37,500</td></tr>
+          <tr><td>25 Domes · 2 bed + loft @ $3,300</td><td class="n">$82,500</td></tr>
+          <tr><td>25 Modern Cabins @ $2,500</td><td class="n">$62,500</td></tr>
           <tr><td>25 A-Frames @ $3,000</td><td class="n">$75,000</td></tr>
-          <tr><td>25 Grand Cabins @ $3,300</td><td class="n">$82,500</td></tr>
-          <tr class="tot"><td>Gross @ full lease</td><td class="n">$240,000</td></tr>
-          <tr class="tot"><td>@ 95% occupancy · annualized</td><td class="n">$228,000 · ~$2.74M</td></tr>
+          
+          <tr class="tot"><td>Gross @ full lease</td><td class="n">$220,000</td></tr>
+          <tr class="tot"><td>@ 95% occupancy · annualized</td><td class="n">$209,000 · ~$2.51M</td></tr>
         </table>
       </div>
       <div>
@@ -355,10 +346,10 @@ tr.tot td{font-weight:600;border-top-width:2px}
       </div>
     </div>
     <div class="bignums">
-      <div class="bignum"><b class="tnum">$1.84M</b><span>Stabilized NOI/yr · $153.5K/mo</span></div>
-      <div class="bignum"><b class="tnum">$0.55M</b><span>Loan payment/yr · 30-yr amort @ 7%</span></div>
-      <div class="bignum"><b class="tnum">$1.29M</b><span>Net to GP + LPs/yr before pref</span></div>
-      <div class="bignum"><b class="tnum">3.34×</b><span>DSCR · NOI ÷ debt service</span></div>
+      <div class="bignum"><b class="tnum">$1.61M</b><span>Stabilized NOI/yr · $134.5K/mo</span></div>
+      <div class="bignum"><b class="tnum">$0.51M</b><span>Loan payment/yr · 30-yr amort @ 7%</span></div>
+      <div class="bignum"><b class="tnum">$1.10M</b><span>Net to GP + LPs/yr before pref</span></div>
+      <div class="bignum"><b class="tnum">3.16×</b><span>DSCR · NOI ÷ debt service</span></div>
     </div>
   </div>
 </section>
@@ -366,31 +357,31 @@ tr.tot td{font-weight:600;border-top-width:2px}
 <!-- 06 CAPITAL STACK -->
 <section>
   <div class="wrap rv">
-    <p class="eyebrow"><span class="num">06</span> The Capital Stack · $10.9M · 63 / 37</p>
+    <p class="eyebrow"><span class="num">06</span> The Capital Stack · $10.1M · 63 / 37</p>
     <h2>Financed like real estate. <em>Shared like a deal.</em></h2>
     <div class="cols2">
       <div>
-        <p class="tbl-cap">Sources · all-in $10.9M</p>
+        <p class="tbl-cap">Sources · all-in $10.1M</p>
         <table>
-          <tr><td>Senior bank construction loan @ 7% (63%)</td><td class="n">$6.9M</td></tr>
-          <tr><td>Equity — LP members: 30% ownership @ 8% pref (37% of capitalization)</td><td class="n">$4.0M</td></tr>
-          <tr class="tot"><td>Total capitalization</td><td class="n">$10.9M</td></tr>
+          <tr><td>Senior bank construction loan @ 7% (63%)</td><td class="n">$6.4M</td></tr>
+          <tr><td>Equity — LP members: 30% ownership @ 8% pref (37% of capitalization)</td><td class="n">$3.7M</td></tr>
+          <tr class="tot"><td>Total capitalization</td><td class="n">$10.1M</td></tr>
         </table>
       </div>
       <div>
         <p class="tbl-cap">NOI → cash to equity · stabilized</p>
         <table>
-          <tr><td>Net operating income (NOI)</td><td class="n">$1.84M</td></tr>
-          <tr><td>Debt service (30-yr amort @ 7% · $6.9M)</td><td class="n">($0.55M)</td></tr>
-          <tr><td>8% pref to LPs (8% × $4.0M)</td><td class="n">($0.32M)</td></tr>
-          <tr class="tot"><td>Cash to equity — distributed by ownership</td><td class="n">~$0.97M</td></tr>
+          <tr><td>Net operating income (NOI)</td><td class="n">$1.61M</td></tr>
+          <tr><td>Debt service (30-yr amort @ 7% · $6.4M)</td><td class="n">($0.51M)</td></tr>
+          <tr><td>8% pref to LPs (8% × $3.7M)</td><td class="n">($0.30M)</td></tr>
+          <tr class="tot"><td>Cash to equity — distributed by ownership</td><td class="n">~$0.80M</td></tr>
         </table>
       </div>
     </div>
     <ul class="wf" style="border-bottom:1px solid var(--line-dark)">
-      <li><span><b>Senior bank debt first</b> — the $6.9M loan (30-yr amort @ 7%) is paid off the top of NOI (~$0.55M/yr), a healthy 3.34× DSCR.</span></li>
-      <li><span><b>8% preferred return to LPs first</b> — cumulative on the $4.0M (~$0.32M/yr), paid before any other distribution.</span></li>
-      <li><span><b>70% of profits to LPs until capital is returned</b> — every distribution counts toward repaying the $4.0M; the Year-5 recapitalization pays off any remaining balance in full.</span></li>
+      <li><span><b>Senior bank debt first</b> — the $6.4M loan (30-yr amort @ 7%) is paid off the top of NOI (~$0.51M/yr), a healthy 3.16× DSCR.</span></li>
+      <li><span><b>8% preferred return to LPs first</b> — cumulative on the $3.7M (~$0.30M/yr), paid before any other distribution.</span></li>
+      <li><span><b>70% of profits to LPs until capital is returned</b> — every distribution counts toward repaying the $3.7M; the Year-5 recapitalization pays off any remaining balance in full.</span></li>
       <li><span><b>The flip</b> — once LP capital is fully returned, distributions follow ownership: 30% to LP members · 70% to the Heart Space side (50% HSH · 20% management). The founder co-invests alongside the group.</span></li>
     </ul>
     <p class="lede" style="margin-top:36px"><em>Cash out, or stay in — a 2–3× MOIC.</em> LPs hold 30% of the entity with senior cash rights: the 8% pref first, then 70% of profits until their capital is fully returned — through distributions, the Year-5 recapitalization, or both. Once whole, the split flips to ownership, and each investor chooses a door: Heart Space holds a call right to buy out LP interests at a target 2–3× total return — or convert to Legacy Owner status: permanent, heritable ownership in a community our families hold for generations. Either path, Heart Space Health remains the majority owner and General Partner — structured like the institutional real-estate deals it's modeled on.</p>
@@ -412,13 +403,13 @@ tr.tot td{font-weight:600;border-top-width:2px}
       <li>15-year ground lease on the 9-acre parcel at just <b>$8,000/mo</b> (2% annual escalator)</li>
       <li>A <b>$10M option to purchase</b> the land before year 8 — the residences carry <b>$7M (70%)</b> of it, with the retreat / Within taking the remaining $3M for their share of the parcel</li>
       <li>During the lease, the landowner carries the land taxes — we only pay on our improvements, keeping carrying costs low through construction and lease-up</li>
-      <li>When we exercise, we lock the land beneath a ~$27M stabilized asset — and capture that spread for our equity, not the landowner's</li>
+      <li>When we exercise, we lock the land beneath a ~$24M stabilized asset — and capture that spread for our equity, not the landowner's</li>
     </ul>
     <div class="rv" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:44px">
       <figure style="margin:0"><img src="images/IMG_5600.jpeg" alt="Land Strategies survey and slope analysis of the parcel along SH 71" style="width:100%;display:block" loading="lazy"><figcaption style="font-size:13.5px;opacity:.62;margin-top:9px">Land Strategies survey — tracts, slopes &amp; entitlements along SH 71.</figcaption></figure>
       <figure style="margin:0"><img src="images/location-aerial-75.jpg" alt="Aerial location map — 10 minutes from downtown Austin, 9.5 acres, 75 homes" style="width:100%;display:block" loading="lazy"><figcaption style="font-size:13.5px;opacity:.62;margin-top:9px">10 minutes from downtown &middot; 9.5-acre parcel &middot; 75 homes.</figcaption></figure>
     </div>
-    <p class="moat-callout">Lock $7M land beneath a <em>$27M</em> stabilized asset — the spread is ours.</p>
+    <p class="moat-callout">Lock $7M land beneath a <em>$24M</em> stabilized asset — the spread is ours.</p>
   </div>
 </section>
 
@@ -444,10 +435,10 @@ tr.tot td{font-weight:600;border-top-width:2px}
     <h2>One build. <em>One community.</em></h2>
     <p class="lede">No phasing, no staged risk — all 75 homes are built in a single mobilization and lease together, bringing full NOI online sooner.</p>
     <div class="tl">
-      <div><p class="when">Raise Close</p><b>Capital in</b><p>$10.9M capitalized — $6.9M senior debt, $4.0M LP equity.</p></div>
+      <div><p class="when">Raise Close</p><b>Capital in</b><p>$10.1M capitalized — $6.4M senior debt, $3.7M LP equity.</p></div>
       <div><p class="when">Sitework</p><b>9 acres live</b><p>Pads, decks, trails, utilities, lighting, and parking across the full parcel.</p></div>
       <div><p class="when">Vertical</p><b class="tnum">75 homes</b><p>Domes, A-frames, and cabins rise together — one crew flow, one mobilization.</p></div>
-      <div><p class="when">Jan 2028</p><b>All homes online</b><p>Lease-up to 95% · $1.84M NOI · $27.1M stabilized value.</p></div>
+      <div><p class="when">Jan 2028</p><b>All homes online</b><p>Lease-up to 95% · $1.61M NOI · $23.7M stabilized value.</p></div>
     </div>
   </div>
 </section>
@@ -487,13 +478,13 @@ tr.tot td{font-weight:600;border-top-width:2px}
 <section class="band-light" style="padding-bottom:72px">
   <div class="wrap rv">
     <p class="eyebrow"><span class="num">11</span> The Opportunity</p>
-    <h2>A $27M asset, <em>built for ~$18M.</em></h2>
+    <h2>A $24M asset, <em>built for ~$17M.</em></h2>
     <div class="cols2" style="margin-top:36px">
       <table>
-        <tr><td>True all-in basis ($10.9M build + $7M land)</td><td class="n">~$17.9M</td></tr>
-        <tr><td>Stabilized NOI (lease phase)</td><td class="n">$1.84M/yr</td></tr>
-        <tr><td>Stabilized value · 6.8% cap</td><td class="n">~$27.1M</td></tr>
-        <tr class="tot"><td>Value created over all-in</td><td class="n">~$9.2M</td></tr>
+        <tr><td>True all-in basis ($10.1M build + $7M land)</td><td class="n">~$17.1M</td></tr>
+        <tr><td>Stabilized NOI (lease phase)</td><td class="n">$1.61M/yr</td></tr>
+        <tr><td>Stabilized value · 6.8% cap</td><td class="n">~$23.7M</td></tr>
+        <tr class="tot"><td>Value created over all-in</td><td class="n">~$6.6M</td></tr>
       </table>
       <p class="lede" style="align-self:center"><em>Recurring. Financeable. Replicable.</em><br>A private living sanctuary with recurring lease income, a rare land-option spread, and a lifestyle brand built to replicate — "Love Where You Live," on the next parcel and the next.</p>
     </div>
@@ -504,7 +495,7 @@ tr.tot td{font-weight:600;border-top-width:2px}
   <div class="wrap">
     <p class="sig">AWKN <em>Residences</em> · Love where you live.</p>
     <p>A Heart Space Health Company · William David Naylor, Founder<br>512.810.6517 · <a href="https://www.awknranch.com">www.awknranch.com</a></p>
-    <p class="fine">Valuation reflects fully-stabilized figures: 75 homes at tiered rents ($2,500–$3,300/mo) at 95% occupancy, capitalized at a 6.8% market cap rate. Rents include WiFi and water; residents pay electric. Construction costs are current estimates — the 888 sf A-frame budget includes $21K of confirmed sub bids with the balance pre-bid; the 688 sf and 1,111 sf budgets are scaled at −15% / +15% of the 888 basis. Dome costs held at prior bulk-pricing basis. Program assumes City confirmation of the impervious-coverage strategy (in process, 50% credit on deck-set homes) and completion of tract rezoning now underway. Internal estimates, not a guarantee of returns.</p>
+    <p class="fine">Valuation reflects fully-stabilized figures: 75 homes at tiered rents ($2,500–$3,300/mo) at 95% occupancy, capitalized at a 6.8% market cap rate. Rents include WiFi and water; residents pay electric. Construction costs are current estimates — the 888 sf A-frame budget includes $21K of confirmed sub bids with the balance pre-bid; the 688 sf budget is scaled at −15% of the 888 basis. Dome costs held at prior bulk-pricing basis. Program assumes City confirmation of the impervious-coverage strategy (in process, 50% credit on deck-set homes) and completion of tract rezoning now underway. Internal estimates, not a guarantee of returns.</p>
   </div>
 </footer>
 
