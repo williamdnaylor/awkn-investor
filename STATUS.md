@@ -7,7 +7,7 @@ _Last updated: 2026-08-05_
 | Surface | URL | Notes |
 |---|---|---|
 | GitHub Pages (client's original) | `williamdnaylor.github.io/awkn-investor/` | untouched, still serving |
-| Vercel production | see `docs/infrastructure.md` | same decks, same paths, plus `/portal` |
+| Vercel production | `awkn-investor.vercel.app` | same decks, same paths, plus `/portal` |
 
 ## Shipped
 
@@ -29,6 +29,15 @@ _Last updated: 2026-08-05_
   invite-only allowlist, sessions manager, recovery surfaces, edge gate with the
   session-refresh bounce.
 - **Allowlist seeded**: `mmicel583@gmail.com`, `wdnaylor@gmail.com`.
+- **Verified against production**, not just locally: all three decks return 200
+  with their original `<title>`; `/portal` 307s an HTML request to
+  `/login?next=/portal` and hard-401s a non-document one; a non-allowlisted
+  signup gets a generic 403; an allowlisted one gets 200 with `token: null`
+  (no session until the email link is clicked) and Resend accepted the
+  verification email from `awkn@miraclemind.dev`. The probe's user, session,
+  account and allowlist rows were deleted afterwards.
+- **Launch-page demos** — three directions, briefed, critiqued and revised;
+  they live outside this repo. See `docs/design-demos.md`.
 
 ## Dark by design
 
@@ -46,6 +55,10 @@ _Last updated: 2026-08-05_
   only thing missing.
 - **Admin promotion** — `npm run seed:admin` promoted 0 rows because no account
   exists yet. Rerun after Matthew's first signup.
+- **Claude Design authorization** (Matthew) — the `claude-design` MCP server
+  needs a browser authorization this seat can't complete. Until it's done the
+  three launch-page demos can't be uploaded and there are no `claude.ai/design`
+  links to record. Link is on the cargo card.
 - **Sender domain** — email goes out as `awkn@miraclemind.dev` (a verified
   Resend domain). A verified AWKN domain should replace it before invitations
   reach investors.

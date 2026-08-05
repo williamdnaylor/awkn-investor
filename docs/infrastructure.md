@@ -37,12 +37,21 @@ Vercel project and Infisical):
 | `EMAIL_FROM` | sender identity |
 | `ALLOWLIST_MODE` | `gated` — invite-only signup |
 
+Set on **Production only**:
+
+| Name | Purpose |
+|---|---|
+| `BETTER_AUTH_URL` | `https://awkn-investor.vercel.app` |
+
 Absent on purpose (each keeps a rung dark; see `STATUS.md`):
 `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_VERIFY_SERVICE_SID`,
 `TWILIO_MESSAGING_SERVICE_SID`, `TWILIO_FROM_NUMBER`.
 
-`BETTER_AUTH_URL` is set to the production domain so passkey origins and email
-links don't follow Vercel's per-deployment URLs.
+`BETTER_AUTH_URL` is deliberately **not** set on Preview. It always wins in
+`baseURL()`, so setting it everywhere would point every preview's passkey origin
+and email links at production. Previews fall back to `VERCEL_BRANCH_URL`, which
+is stable per branch — the per-deployment `VERCEL_URL` would break passkeys
+registered on an earlier deployment of the same branch.
 
 ## Deploying
 
