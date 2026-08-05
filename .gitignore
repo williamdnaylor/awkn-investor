@@ -1,0 +1,31 @@
+# dependencies
+/node_modules
+
+# next
+/.next/
+/out/
+next-env.d.ts
+*.tsbuildinfo
+
+# Mirrored client decks. The originals live at the repo root and are the source
+# of truth (GitHub Pages serves them from there); scripts/copy-legacy.mjs copies
+# them here at prebuild so Vercel serves the same bytes at the same paths.
+/public/index.html
+/public/investor-presentation/
+/public/awkn-residences/
+
+# local delivery stubs (email/SMS written to disk when no provider is set)
+/var/
+
+# env
+.env
+.env.*
+!.env.example
+
+# seat-local ops notes (hermes)
+/.hermes/
+
+# vercel / os
+.vercel
+.DS_Store
+*.log

@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+/**
+ * Palette lifted from the client-authored decks so the portal reads as the
+ * same publication: ink on bone, lantern gold for action.
+ */
+@theme {
+  --color-ink: #161815;
+  --color-ink-soft: #4a4d46;
+  --color-bone: #f1ede3;
+  --color-bone-dim: #e4dece;
+  --color-lantern: #dca648;
+  --color-lantern-deep: #b8862f;
+
+  --font-display: Fraunces, "Iowan Old Style", Georgia, serif;
+  --font-sans: Archivo, system-ui, -apple-system, sans-serif;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body {
+  background: var(--color-bone);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-lantern);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-lantern-deep);
+  outline-offset: 2px;
+}

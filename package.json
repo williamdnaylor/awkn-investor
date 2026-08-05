@@ -1,0 +1,52 @@
+{
+  "name": "awkn-investor",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "prebuild": "node scripts/copy-legacy.mjs",
+    "predev": "node scripts/copy-legacy.mjs",
+    "prestart": "node scripts/copy-legacy.mjs",
+    "build": "next build",
+    "dev": "next dev -H 127.0.0.1",
+    "start": "next start -H 127.0.0.1",
+    "clean": "rm -rf .next",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "seed:admin": "tsx scripts/seed-allowlist-admin.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "next lint",
+    "quality-check": "npm run typecheck && npm run build"
+  },
+  "dependencies": {
+    "@better-auth/passkey": "^1.6.25",
+    "@t3-oss/env-nextjs": "^0.13.11",
+    "better-auth": "^1.6.25",
+    "drizzle-orm": "^0.45.2",
+    "lucide-react": "^0.543.0",
+    "next": "^16.1.1",
+    "postgres": "^3.4.7",
+    "qrcode.react": "^4.2.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "resend": "^6.18.0",
+    "server-only": "^0.0.1",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.15",
+    "@types/node": "^20.14.10",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "drizzle-kit": "^0.31.10",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.0.15",
+    "tsx": "^4.21.0",
+    "typescript": "^5.8.2"
+  }
+}
