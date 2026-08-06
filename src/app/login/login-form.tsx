@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useState } from "react";
 import { Fingerprint } from "lucide-react";
@@ -11,10 +11,31 @@ import { authClient } from "~/lib/auth-client";
 
 type Step = "credentials" | "2fa";
 
+/**
+ * The edge gate writes `next` for every path on the host, so an unchecked
+ * value here would be an open redirect. Same-origin relative paths only —
+ * mirroring `safeTarget` in /api/session-refresh.
+ */
+function safeNext(raw: string | null): string {
+  if (!raw) return "/portal";
+  if (!raw.startsWith("/") || raw.startsWith("//") || raw.startsWith("/\\")) {
+    return "/portal";
+  }
+  return raw;
+}
+
+/**
+ * A real document load, not `router.push`. `next` can now be one of the static
+ * decks, which lives outside the app router and can't be client-navigated to;
+ * a full load also re-renders every server component against the fresh session.
+ */
+function leaveFor(dest: string) {
+  window.location.assign(dest);
+}
+
 export function LoginForm() {
-  const router = useRouter();
   const params = useSearchParams();
-  const next = params.get("next") ?? "/portal";
+  const next = safeNext(params.get("next"));
 
   const [step, setStep] = useState<Step>(
     params.get("step") === "2fa" ? "2fa" : "credentials"
@@ -41,8 +62,7 @@ export function LoginForm() {
       setError(res.error.message ?? "That passkey didn't work.");
       return;
     }
-    router.push(next);
-    router.refresh();
+    leaveFor(next);
   }
 
   async function signInWithPassword(e: React.FormEvent) {
@@ -61,8 +81,7 @@ export function LoginForm() {
       return;
     }
     if (res.data && "twoFactorRedirect" in res.data) return;
-    router.push(next);
-    router.refresh();
+    leaveFor(next);
   }
 
   if (step === "2fa") {
@@ -130,7 +149,6 @@ function TwoFactorStep({
   next: string;
   onBack: () => void;
 }) {
-  const router = useRouter();
   const offersSms = methods.includes("otp");
   const [mode, setMode] = useState<"totp" | "otp" | "backup">("totp");
   const [code, setCode] = useState("");
@@ -167,8 +185,7 @@ function TwoFactorStep({
       );
       return;
     }
-    router.push(next);
-    router.refresh();
+    leaveFor(next);
   }
 
   return (
