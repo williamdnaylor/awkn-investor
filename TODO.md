@@ -40,6 +40,8 @@ _None known._
 - Light phone enrolment once a Twilio Verify service exists.
 - Verify an AWKN sender domain in Resend and replace `awkn@miraclemind.dev`.
 - Auto-deploy on push, once the Vercel GitHub App is installed on the repo.
+  Until then both targets are deployed by hand from a seat (`vercel deploy`,
+  `--prod` for `main`), so the `dev` preview goes stale the moment `dev` moves.
 - Pick a launch-page direction (three are in Claude Design — see
   `docs/design-demos.md`) and rebuild it here in the app's stack.
 - Reconcile `README.md`'s "75 homes" with the confirmed 80 lots. Not blocking:

@@ -7,7 +7,8 @@ _Last updated: 2026-08-06_
 | Surface | URL | Notes |
 |---|---|---|
 | GitHub Pages (client's original) | `williamdnaylor.github.io/awkn-investor/` | untouched, still serving, still **public** — to be turned off once William is signed in on Vercel (see `TODO.md`) |
-| Vercel production | `awkn-investor.vercel.app` | **running an old build.** Same decks at the same paths, but only `/portal` is gated — the root and both decks still answer 200 to an anonymous request. The whole-host gate is on `main` and unshipped; see "Waiting on someone else" |
+| Vercel production | `awkn-investor.vercel.app` | current — `62b3d56`. **Fully gated:** the root, both decks and their images all 307 an anonymous visitor to `/login?next=…`; only `/login`, `/signup`, `/forgot-password`, `/reset-password` and `/api/auth/*` answer signed-out |
+| Vercel preview (`dev`) | `awkn-investor-oca4iu7nv-awkn-team.vercel.app` | same commit; behind Vercel's team SSO as well as the app's gate, so it needs a Vercel team login to open |
 
 ## Shipped
 
@@ -29,8 +30,8 @@ _Last updated: 2026-08-06_
   the session-refresh bounce.
 - **Allowlist seeded**: `mmicel583@gmail.com`, `wdnaylor@gmail.com` — both
   promoted to `admin` by `npm run seed:admin` once their accounts exist.
-- **The whole host is gated** — *in code on `main`, not yet on production.* The
-  decks, their images and the root page all require a session; only the
+- **The whole host is gated**, verified against production. The decks, their
+  images and the root page all require a session; only the
   surfaces you need in order to *get* one are reachable signed-out. Two routing
   facts it depends on are documented where they bite — the deck trailing slash
   (`src/proxy.ts`, not `redirects()`, which would loop) and the comma in one
@@ -76,18 +77,15 @@ _Last updated: 2026-08-06_
 
 ## Waiting on someone else
 
-- **A Vercel deploy** (Matthew) — **the blocker, and why the production row
-  above says "old build".** Everything since `46f3ae3` is on `main` and
-  undeployed: the whole-host gate, the two roles, both auth fixes. The seat
-  holds no Vercel credentials by design (the env allowlist added after a seat
-  echoed a token into its transcript on 2026-08-04), so `vercel deploy` stops
-  at a device-login prompt. Until it ships the Vercel host is as public as
-  GitHub Pages — **turning Pages off would not gate anything** — and the queued
-  `dev` preview (2026-08-06) is blocked on the same credentials. Installing
-  <https://github.com/apps/vercel> (William's account) makes this
-  self-solving: pushes to `main` would deploy themselves.
-- **Admin promotion** — `npm run seed:admin` promoted 0 rows because no account
-  exists yet. Rerun after Matthew's first signup.
+- **A first signup** — `npm run seed:admin` promoted 0 rows because no account
+  exists yet. Rerun after Matthew's, and again after William's. Until one of
+  them signs up, nobody can see the decks on Vercel at all: the gate is real
+  now, and GitHub Pages is the only way in.
+- **Auto-deploy** — deploys are still manual from the seat (`vercel deploy`,
+  via the Infisical provisioning lane; the token never enters a seat env or a
+  transcript). Installing <https://github.com/apps/vercel> on the repo
+  (William's account) makes it self-solving: pushes to `main` and `dev` would
+  deploy themselves, which is also what keeps the preview current.
 - **A direction for the launch page** (Matthew/William) — three are up in Claude
   Design. Comment on one and it gets rebuilt here.
 - **A contact address for AWKN Residences** — all three launch pages want one
