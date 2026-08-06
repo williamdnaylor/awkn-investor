@@ -39,6 +39,9 @@ _None known._
 - Light the SMS second-factor rung once a Twilio Messaging sender exists.
 - Light phone enrolment once a Twilio Verify service exists.
 - Verify an AWKN sender domain in Resend and replace `awkn@miraclemind.dev`.
+  Not cosmetic: the first real verification email landed in Gmail spam
+  (2026-08-06). An investor who never finds it reads it as "the login is
+  broken", so this should land before invitations go out.
 - Auto-deploy on push, once the Vercel GitHub App is installed on the repo.
   Until then both targets are deployed by hand from a seat (`vercel deploy`,
   `--prod` for `main`), so the `dev` preview goes stale the moment `dev` moves.

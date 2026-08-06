@@ -77,10 +77,12 @@ _Last updated: 2026-08-06_
 
 ## Waiting on someone else
 
-- **A first signup** — `npm run seed:admin` promoted 0 rows because no account
-  exists yet. Rerun after Matthew's, and again after William's. Until one of
-  them signs up, nobody can see the decks on Vercel at all: the gate is real
-  now, and GitHub Pages is the only way in.
+- **William's signup** — Matthew's account exists and is `admin`; William's
+  allowlist row is waiting and carries `admin`, so he becomes one the moment he
+  registers. No manual promotion step any more.
+- **Sender reputation** — the verification email works but landed in Gmail's
+  spam folder (2026-08-06, first real signup). Warn anyone you invite until a
+  verified AWKN domain with its own DKIM/DMARC replaces the shared sender.
 - **Auto-deploy** — deploys are still manual from the seat (`vercel deploy`,
   via the Infisical provisioning lane; the token never enters a seat env or a
   transcript). Installing <https://github.com/apps/vercel> on the repo
