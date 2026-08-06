@@ -18,7 +18,13 @@ _None._
 
 ## Bugs (broken functionality)
 
-_None known._
+- **`the-village.html` (Claude Design) prints a forbidden fact in its pixels.**
+  Its Dome card uses `IMG_8502.JPG`, which is a screen capture of the investor
+  deck with "25 HOMES" burnt in — a per-type unit count contradicting the
+  confirmed 80. One `alt` on the same page describes a bodywork session; the
+  image is a still-life with no person in it. Repair in the harness, and audit
+  `golden-hour.html` and `bone-and-light.html` for the same files
+  (`docs/design-demos.md` lists them). Mockups only — nothing public.
 
 ## Tech Debt (code quality)
 
@@ -45,7 +51,7 @@ _None known._
 - Auto-deploy on push, once the Vercel GitHub App is installed on the repo.
   Until then both targets are deployed by hand from a seat (`vercel deploy`,
   `--prod` for `main`), so the `dev` preview goes stale the moment `dev` moves.
-- Pick a launch-page direction (three are in Claude Design — see
+- Pick a launch-page direction (six are in Claude Design across two rounds — see
   `docs/design-demos.md`) and rebuild it here in the app's stack.
 - Reconcile `README.md`'s "75 homes" with the confirmed 80 lots. Not blocking:
   `README.md` is client-authored and was left as written.
