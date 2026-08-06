@@ -45,6 +45,9 @@ _None._
 - Auto-deploy on push, once the Vercel GitHub App is installed on the repo.
   Until then both targets are deployed by hand from a seat (`vercel deploy`,
   `--prod` for `main`), so the `dev` preview goes stale the moment `dev` moves.
+  **Currently owed a production deploy:** the favicon/OG commit is merged and
+  pushed to `main` but prod still runs the older build, so `/favicon.ico` 404s
+  and shared links unfurl bare. One `vercel deploy --prod` closes it.
 - Pick a launch-page direction (seven are in Claude Design across three rounds —
   see `docs/design-demos.md`) and rebuild it here in the app's stack.
 - The design project's contact sheet (`index.html`) still lists only rounds one
