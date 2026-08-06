@@ -39,11 +39,11 @@ _Last updated: 2026-08-06_
 - **Two roles.** Matthew and William are administrators and can invite people;
   everyone they invite signs up as a `viewer`, and only admins see the team
   section. The edge gate still never reads role — that stays in `guards.ts`.
-- **Launch-page demos** — two rounds of three directions, generated in the
+- **Launch-page demos** — seven directions across three rounds, generated in the
   Claude Design harness by Fable 5 and living in Matthew's account, not in this
-  repo. Round two (2026-08-06) is photographic, built on the decks' own images
-  and hero film; a contact sheet links both rounds and every page's CTA is inert
-  because no contact address exists. Links in `docs/design-demos.md`.
+  repo. Round three (2026-08-06) came from a loosened brief and a render-and-
+  critique loop, and is the cleanest on facts. Every CTA is inert because no
+  contact address exists. Links in `docs/design-demos.md`.
 - **Auth evidence battery** — `scripts/e2e/`, 64 assertions, green twice in a
   row. It boots the real production build against a throwaway Postgres and
   drives real HTTP with real cryptography — a software authenticator whose ES256
@@ -90,10 +90,10 @@ _Last updated: 2026-08-06_
   transcript). Installing <https://github.com/apps/vercel> on the repo
   (William's account) makes it self-solving: pushes to `main` and `dev` would
   deploy themselves, which is also what keeps the preview current.
-- **A direction for the launch page** (Matthew/William) — six are up in Claude
-  Design across two rounds. Comment on one and it gets rebuilt here. Round two
-  borrows home specs and rents from the investor deck; confirm both before any
-  of it is public.
+- **A direction for the launch page** (Matthew/William) — seven are up in Claude
+  Design across three rounds. Comment on one and it gets rebuilt here. Rounds two
+  and three borrow home specs and rents from the investor deck; confirm both
+  before any of it is public.
 - **A contact address for AWKN Residences** — every launch page wants one and
   none may invent it; each closing CTA is inert until it arrives.
 
