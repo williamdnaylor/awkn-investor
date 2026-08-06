@@ -15,7 +15,7 @@ _Last updated: 2026-08-06_
 - **Client decks preserved.** `index.html`, `investor-presentation/` and
   `awkn-residences/` are byte-identical at the repo root; `copy-legacy.mjs`
   mirrors them into `public/` at prebuild and `next.config.js` rewrites onto
-  them. All three return 200 with the original `<title>` under `next start`.
+  them. All three serve the original markup under `next start`.
 - **Next.js 16 app scaffold** — App Router, Tailwind 4, strict TS. Zero-env
   `next build` is green (every env var optional in `src/env.js`).
 - **Neon** project `awkn-investor` provisioned; 8 tables migrated. A scoped role
@@ -28,73 +28,73 @@ _Last updated: 2026-08-06_
   devices, DB-backed rate limiting, HIBP, email verification, admin plugin,
   invite-only allowlist, sessions manager, recovery surfaces, edge gate with
   the session-refresh bounce.
-- **Allowlist seeded**: `mmicel583@gmail.com`, `wdnaylor@gmail.com` — both
-  promoted to `admin` by `npm run seed:admin` once their accounts exist.
+- **Allowlist seeded**: `mmicel583@gmail.com`, `wdnaylor@gmail.com`, both
+  carrying `admin`.
 - **The whole host is gated**, verified against production. The decks, their
   images and the root page all require a session; only the surfaces you need in
   order to *get* one are reachable signed-out. Two routing facts it depends on
-  are documented where they bite — the deck trailing slash
-  (`src/proxy.ts`, not `redirects()`, which would loop) and the comma in one
-  client image filename, which only survives Next's static handler when
-  middleware leaves it encoded.
+  are documented where they bite — the deck trailing slash (`src/proxy.ts`, not
+  `redirects()`, which would loop) and the comma in one client image filename,
+  which only survives Next's static handler when middleware leaves it encoded.
 - **Two roles.** Matthew and William are administrators and can invite people;
-  everyone they invite signs up as a `viewer`. Only admins see the team
+  everyone they invite signs up as a `viewer`, and only admins see the team
   section. The edge gate still never reads role — that stays in `guards.ts`.
-- **Launch-page demos** — two rounds of three directions, generated in the
+- **Launch-page demos** — seven directions across three rounds, generated in the
   Claude Design harness by Fable 5 and living in Matthew's account, not in this
-  repo. Round two (2026-08-06) is photographic, built on the decks' own images
-  and hero film; a contact sheet links both rounds and every page's CTA is inert
-  because no contact address exists. Links in `docs/design-demos.md`.
+  repo. Round three (2026-08-06) came from a loosened brief and a render-and-
+  critique loop, and is the cleanest on facts. Every CTA is inert because no
+  contact address exists. Links in `docs/design-demos.md`.
 - **Auth evidence battery** — `scripts/e2e/`, 64 assertions, green twice in a
   row. It boots the real production build against a throwaway Postgres and
-  drives real HTTP with real cryptography: a software authenticator whose ES256
-  WebAuthn assertions the server verifies exactly as it would a YubiKey's, and
-  an RFC 6238 TOTP generator. Covered: invite-only signup and its
-  anti-enumeration refusal, email verification, role defaults, HIBP,
-  forgot/reset with single-use tokens, passkey register → sign-in → forgery
-  rejection → rename, TOTP enrol → challenge, backup-code single-use,
-  trusted-device skip, session list/revoke, ban, rate limiting, and the
+  drives real HTTP with real cryptography — a software authenticator whose ES256
+  assertions the server verifies exactly as it would a YubiKey's, and an RFC
+  6238 TOTP generator. Covered: invite-only signup and its anti-enumeration
+  refusal, email verification, role defaults, HIBP, forgot/reset, passkey
+  register → sign-in → forgery rejection → rename, TOTP, backup-code
+  single-use, trusted-device skip, session revoke, ban, rate limiting, the
   whole-host gate. Delivery is stubbed by an allowlisted child env, so it can
-  never send real mail or SMS, and it deletes every row it creates. Transcript
-  in `.hermes/pm/evidence/`.
+  never send real mail or SMS; it deletes every row it creates. Transcript in
+  `.hermes/pm/evidence/`.
 - **Two defects it caught**, both fixed and re-proved by it. (1) `guards.ts`
-  asked for the session without `disableCookieCache`, so the DB-backed
-  authorisation layer was served the same five-minute snapshot the edge gate
-  uses — a banned or demoted user kept access for up to five minutes, precisely
-  the window `src/proxy.ts` documents as *not* applying to authorisation. (2)
-  The gate and Better Auth disagreed about the snapshot's cookie name (base-URL
-  protocol vs `NODE_ENV`), and because the refresh route cleared the loop guard
-  on success, a production build over http turned every signed-in request into
-  an infinite gate↔refresh loop. The gate now asks for both names and the guard
-  survives, so a disagreement costs one round trip and then an honest `/login`.
+  asked for the session without `disableCookieCache`, so authorisation was
+  served the same five-minute snapshot the edge gate uses — a banned user kept
+  access for the window `src/proxy.ts` documents as *not* applying to it.
+  (2) The gate and Better Auth disagreed about the snapshot's cookie name
+  (base-URL protocol vs `NODE_ENV`); with the refresh route clearing the loop
+  guard on success, a production build over http looped for ever. The gate now
+  asks for both names and the guard survives.
+- **Link previews and icons** (`feat/site-icons-og`). Any deck link redirects a
+  signed-out visitor — so, every unfurl bot — to `/login`, which now carries a
+  favicon, an apple icon and one Open Graph card for the whole host. The four
+  asset paths are deliberately reachable without a session: an og:image behind
+  the gate never renders. The decks' own tags are untouched client material —
+  `awkn-residences/` names a relative og:image most scrapers drop, and
+  `investor-presentation/` one on a third-party host.
 
 ## Dark by design
 
 - **SMS second factor** — no Twilio sender (`TWILIO_MESSAGING_SERVICE_SID` /
-  `TWILIO_FROM_NUMBER` absent), so `otpOptions` is omitted and "otp" never
-  appears in `twoFactorMethods`. Adding either var lights the rung.
-- **Phone enrolment** — no `TWILIO_VERIFY_SERVICE_SID`, so the settings section
-  is hidden in production. Same one-var fix.
+  `TWILIO_FROM_NUMBER`), so `otpOptions` is omitted and "otp" never appears in
+  `twoFactorMethods`. **Phone enrolment** — no `TWILIO_VERIFY_SERVICE_SID`, so
+  the section is hidden in production. Either rung lights up on one var.
 
 ## Waiting on someone else
 
 - **William's signup** — Matthew's account exists and is `admin`; William's
-  allowlist row is waiting and carries `admin`, so he becomes one the moment he
-  registers. No manual promotion step any more.
-- **Sender reputation** — the verification email works but landed in Gmail's
-  spam folder (2026-08-06, first real signup). Warn anyone you invite until a
-  verified AWKN domain with its own DKIM/DMARC replaces the shared sender.
+  allowlist row carries `admin`, so he becomes one the moment he registers.
+- **Sender reputation** — verification email works but landed in Gmail spam
+  (2026-08-06, first real signup). Warn invitees until a verified AWKN domain
+  with its own DKIM/DMARC replaces the shared sender.
 - **Auto-deploy** — deploys are still manual from the seat (`vercel deploy`,
   via the Infisical provisioning lane; the token never enters a seat env or a
   transcript). Installing <https://github.com/apps/vercel> on the repo
   (William's account) makes it self-solving: pushes to `main` and `dev` would
   deploy themselves, which is also what keeps the preview current.
-- **A direction for the launch page** (Matthew/William) — six are up in Claude
-  Design across two rounds. Comment on one and it gets rebuilt here. Round two
-  borrows home specs and rents from the investor deck; confirm both before any
-  of it is public.
+- **A direction for the launch page** (Matthew/William) — seven are up in Claude
+  Design across three rounds. Comment on one and it gets rebuilt here. Rounds two
+  and three borrow home specs and rents from the investor deck; confirm both
+  before any of it is public.
 - **A contact address for AWKN Residences** — every launch page wants one and
   none may invent it; each closing CTA is inert until it arrives.
 
-Standing decisions (80 lots, the two-role model, Pages staying up, CLI deploys)
-live in `.hermes/pm/answers.md`.
+Standing decisions live in `.hermes/pm/answers.md`.

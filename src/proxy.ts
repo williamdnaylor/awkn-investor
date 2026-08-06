@@ -30,8 +30,24 @@ const AUTH_SURFACES = [
   "/api/session-refresh",
 ];
 
-/** Chrome the signed-out pages need. Nothing here reveals client material. */
-const ALWAYS_PUBLIC = ["/favicon.ico", "/robots.txt"];
+/**
+ * Chrome the signed-out pages need. Nothing here reveals client material.
+ *
+ * The icons and the Open Graph card are generated from `src/app/` by Next's
+ * file conventions. They have to stay reachable without a session for two
+ * reasons: the browser fetches the favicon while rendering `/login` itself,
+ * and an unfurl bot pasting a link into Slack or iMessage fetches the card
+ * anonymously — an og:image behind the gate is an og:image that never renders.
+ * The card carries a marketing photograph and the same title the public
+ * GitHub Pages decks already publish, and nothing else.
+ */
+const ALWAYS_PUBLIC = [
+  "/favicon.ico",
+  "/robots.txt",
+  "/icon.png",
+  "/apple-icon.png",
+  "/opengraph-image.jpg",
+];
 
 const SESSION_COOKIES = [
   "__Secure-better-auth.session_token",

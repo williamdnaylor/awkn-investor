@@ -11,6 +11,7 @@ import { twoFactor } from "better-auth/plugins/two-factor";
 import { passkey } from "@better-auth/passkey";
 
 import { env } from "~/env";
+import { baseURL } from "~/lib/base-url";
 import { authDb } from "~/server/db/auth-client";
 import {
   account,
@@ -43,20 +44,6 @@ if (isProductionRuntime() && !isBuildPhase()) {
   if (!env.AUTH_DATABASE_URL && !env.DATABASE_URL) {
     throw new Error("AUTH_DATABASE_URL (or DATABASE_URL) is required in production.");
   }
-}
-
-/**
- * Preview deployments get a fresh VERCEL_URL per deployment, which breaks
- * passkey origins and email links; VERCEL_BRANCH_URL is stable per branch, so
- * prefer it. BETTER_AUTH_URL always wins when set explicitly.
- */
-function baseURL(): string {
-  if (env.BETTER_AUTH_URL) return env.BETTER_AUTH_URL;
-  if (env.VERCEL_ENV === "preview" && env.VERCEL_BRANCH_URL) {
-    return `https://${env.VERCEL_BRANCH_URL}`;
-  }
-  if (env.VERCEL_URL) return `https://${env.VERCEL_URL}`;
-  return "http://localhost:3000";
 }
 
 function trustedOrigins(): string[] {

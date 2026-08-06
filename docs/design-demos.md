@@ -15,6 +15,34 @@ Project: [AWKN Residences — launch pages](https://claude.ai/design/p/ea8266cd-
 Start at the [contact sheet](https://claude.ai/design/p/ea8266cd-9d43-4310-b7d3-04d1ab4c454c?file=index.html)
 — it links both rounds and restates what the pages are allowed to claim.
 
+## Round three — loosened brief (2026-08-06)
+
+One page, not three. Generated after two changes to the method: the brief was
+rewritten to stop prescribing structure (round two's pages had converged on the
+same section order because the brief supplied one), and the generation loop was
+wired to a real render — the agent screenshots its own page and critiques the
+pixels between passes rather than reasoning about its markup.
+
+| | Direction | The idea |
+|---|---|---|
+| **D** | [Love where you live](https://claude.ai/design/p/ea8266cd-9d43-4310-b7d3-04d1ab4c454c?file=round-three.html) | Warm paper against near-black, the hero film behind an editorial serif lockup. Three home types as offset cards, an amenities ledger set as a two-column rule sheet, and a full-bleed ranch band. The offsets are deliberate: `.home-card:nth-child(2/3)` and the gallery duo carry explicit `margin-top`, all of which reset to `0` below 860px. |
+
+It is the cleanest of the seven on facts: no forbidden image, the total is only
+ever 80, the three rents are the only dollar figures, no investor language, and
+the closing CTA is inert with its placeholder note visible.
+
+Three things to weigh before picking it:
+
+- It says **"homes"** throughout — "Eighty homes set into nine acres" — where the
+  confirmed fact is 80 **lots**. Not a contradiction of the count, but a lot is
+  land and a home is a structure. Client's call, so it was left as generated.
+- The gold `AUSTIN, TEXAS` hero eyebrow repeats the header's own top-right
+  `AUSTIN, TEXAS`, and both are in view at once on mobile.
+- The full-bleed ranch band uses `awkn-poster.jpg`, a deck poster frame with the
+  AWKN **Ranch** wordmark burnt into it. Legitimate here — that section is about
+  the ranch next door — but it is baked type: it cannot be re-set, translated, or
+  served at a second resolution.
+
 ## Round two — photographic (2026-08-06)
 
 Built from the ecosystem's own photography and the investor deck's hero film,
@@ -62,9 +90,34 @@ confirmed, and should be checked before anything is public:**
   (saltwater pool, salt room, sauna, cold plunge, studio, yoga, pickleball,
   trails, farm, chef food); residents paying their own electric.
 
-Checked on every round-two page after generation, all three clean: the total is
-always 80 (never a per-type count), rents are the only dollar figures, there is
-no investor language anywhere, and no contact route is invented.
+Every round-two page was fact-checked after generation and passed: the total is
+always 80, rents are the only dollar figures, there is no investor language, and
+no contact route is invented.
+
+**That check was insufficient, and it missed something.** It read the markup. On
+2026-08-06 a screenshot of `the-village.html` showed the Dome card carrying
+`IMG_8502.JPG` — which is not a photograph but a **screen capture of the
+investor deck**, with "25 HOMES" and a price card burnt into the pixels. So the
+page printed a per-type unit count that contradicts the confirmed 80, in a form
+no text search can see. A page can breach the fact boundary in its images alone;
+from here the check is run against a render, not against the source.
+
+**Repaired 2026-08-06.** All three round-two pages carried it, not just
+`the-village.html`. Each Dome card now points at `awkn-residences/images/dome.jpg`
+— a real photograph, no burnt-in type — and the three `alt` texts were rewritten
+from the pixels (the dome is white and panelled at golden hour, not "timber-clad
+… at dusk"). `the-village.html` already used that photograph higher up the page,
+so it now shows the same image twice; harmless, but worth re-cropping if that
+direction is chosen.
+
+One trap worth recording, because it cost a round of false alarms: a full-page
+screenshot taken with `captureBeyondViewport` does **not** resolve
+`loading="lazy"` images. Chrome frees the decoded bitmap of anything far from the
+real viewport, so below-fold photographs capture as empty boxes and the page
+looks broken when it is fine. Scrolling the page first is not enough. The
+screenshot rig now forces every image to `loading="eager"` and awaits `decode()`
+before capturing — without that, a render lies in exactly the direction that
+invites "fixing" what isn't broken.
 
 ## Two standing constraints
 
@@ -73,10 +126,24 @@ no investor language anywhere, and no contact route is invented.
   `mailto:`** until the client supplies one.
 - **Per-type unit counts are excluded.** The decks say 25 of each (75) and one
   site map says 88; the confirmed figure is **80 lots total**, so only the total
-  is printed. The parcel maps (`location-aerial-75.jpg`, `IMG_5600.jpeg`,
-  `IMG_8245.jpeg`, `expansion-land-survey.png`) bake conflicting counts into the
-  pixels and are excluded from every page. `ketamine-session.jpg` is excluded
-  too — wrong register for a public residential page.
+  is printed — *in pixels as well as in text*.
+
+### Images that may never appear on a launch page
+
+Several files in the deck's `images/` directory look like photographs in a
+listing and are not. Each was opened and looked at; the reason is what the file
+actually contains.
+
+| File | Why |
+|---|---|
+| `IMG_8502.JPG`, `IMG_8503.jpeg` | Screen captures of the investor deck. "25 HOMES" and a price card are burnt in. |
+| `IMG_8394.JPG`, `IMG_8507.JPG`, `dome-technology.png` | Deck screenshots. |
+| `location-aerial-75.jpg`, `IMG_5600.jpeg`, `IMG_8245.jpeg`, `expansion-land-survey.png` | Parcel maps and surveys carrying lot counts that contradict the confirmed 80. |
+| `ketamine-session.jpg` | Clinical imagery — wrong register for a public residential page. |
+
+Two `alt` texts also described things their images do not contain
+(`bodywork-session.jpg` is a still-life of oils and a candle, not a session with
+a person in it). Descriptions in the brief are now written from the pixels.
 
 ## Note on the source photography
 
