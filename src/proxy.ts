@@ -49,6 +49,29 @@ const REFRESH_GUARD = "svr";
  */
 const DECK_DIRS = ["/investor-presentation", "/awkn-residences"];
 
+/**
+ * Read the snapshot without guessing at its cookie name.
+ *
+ * Better Auth writes `__Secure-better-auth.session_data` or the bare
+ * `better-auth.session_data` depending on whether its *base URL* is https
+ * (`cookies/index.mjs`: `baseURLString.startsWith("https://")`). Left to itself
+ * `getCookieCache` picks the name from `NODE_ENV` instead — so a production
+ * build served over http writes one name and reads the other, and every
+ * signed-in request bounces off a snapshot it can never see. Asking for both is
+ * cheap (a cookie parse and an HMAC verify) and removes the disagreement.
+ *
+ * Trying the wrong name first is harmless: the snapshot is signed, so a name
+ * that isn't there simply yields null.
+ */
+async function readSnapshot(req: NextRequest) {
+  const httpsFirst = req.nextUrl.protocol === "https:";
+  for (const isSecure of [httpsFirst, !httpsFirst]) {
+    const cached = await getCookieCache(req, { isSecure }).catch(() => null);
+    if (cached) return cached;
+  }
+  return null;
+}
+
 /** Let the request through — adding the deck trailing slash if it's missing. */
 function pass(req: NextRequest) {
   const { pathname, search } = req.nextUrl;
@@ -96,7 +119,7 @@ export async function proxy(req: NextRequest) {
   }
 
   // HMAC-verified snapshot. Throws without a secret, hence the guard above.
-  const cached = await getCookieCache(req).catch(() => null);
+  const cached = await readSnapshot(req);
   if (cached) return pass(req);
 
   const hasSessionToken = SESSION_COOKIES.some((name) =>

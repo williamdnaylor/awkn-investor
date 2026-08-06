@@ -42,8 +42,17 @@ export async function GET(req: NextRequest) {
   headers.getSetCookie().forEach((cookie) => {
     res.headers.append("set-cookie", cookie);
   });
-  // The session is live again — clear the loop guard so a later expiry can
-  // bounce once more.
-  res.cookies.delete("svr");
+  /**
+   * The loop guard is deliberately left in place, not cleared on success.
+   *
+   * It expires by itself in thirty seconds, which is already all a later
+   * snapshot expiry needs in order to bounce again — the snapshot lives five
+   * minutes, so the guard is always long gone by then. Clearing it here instead
+   * would mean that whenever the gate *cannot* read the snapshot this route has
+   * just re-issued, the two would hand the request back and forth forever: the
+   * gate bounces, this route succeeds and clears the guard, the gate bounces
+   * again. Keeping it turns that disagreement into one wasted round trip and
+   * then an honest /login, which is a failure a user can actually recover from.
+   */
   return res;
 }
