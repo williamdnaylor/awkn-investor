@@ -44,10 +44,9 @@ _None._
   broken", so this should land before invitations go out.
 - Auto-deploy on push, once the Vercel GitHub App is installed on the repo.
   Until then both targets are deployed by hand from a seat (`vercel deploy`,
-  `--prod` for `main`), so the `dev` preview goes stale the moment `dev` moves.
-  **Currently owed a production deploy:** the favicon/OG commit is merged and
-  pushed to `main` but prod still runs the older build, so `/favicon.ico` 404s
-  and shared links unfurl bare. One `vercel deploy --prod` closes it.
+  `--prod` for `main`), so either goes stale the moment its branch moves.
+  Production was last deployed by hand on 2026-08-06 and is current with
+  `main`; `dev` was fast-forwarded to the same commit at the same time.
 - Pick a launch-page direction (seven are in Claude Design across three rounds —
   see `docs/design-demos.md`) and rebuild it here in the app's stack.
 - Reconcile `README.md`'s "75 homes" with the confirmed 80 lots. Not blocking:

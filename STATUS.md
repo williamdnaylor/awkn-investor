@@ -7,7 +7,7 @@ _Last updated: 2026-08-06_
 | Surface | URL | Notes |
 |---|---|---|
 | GitHub Pages (client's original) | `williamdnaylor.github.io/awkn-investor/` | untouched, still serving, still **public** — to be turned off once William is signed in on Vercel (see `TODO.md`) |
-| Vercel production | `awkn-investor.vercel.app` | serving an **older commit** of `main` — the icons and OG card are merged and pushed but **not deployed** (`/favicon.ico` still 404s in prod). No Vercel CLI or token on this seat; needs the GitHub App or a deploy seat. **Fully gated:** the root, both decks and their images all 307 an anonymous visitor to `/login?next=…`; only `/login`, `/signup`, `/forgot-password`, `/reset-password` and `/api/auth/*` answer signed-out |
+| Vercel production | `awkn-investor.vercel.app` | **current with `main` (`ad3ed36`)** as of 2026-08-06, deployment `dpl_73bhvUzCt2BWBR4Jdxk6eyTwpacd`. Favicon, apple icon and the OG card all serve 200 and `og:image` resolves absolute. **Fully gated:** the root, both decks and their images all 307 an anonymous visitor to `/login?next=…`; only `/login`, `/signup`, `/forgot-password`, `/reset-password` and `/api/auth/*` answer signed-out |
 | Vercel preview (`dev`) | `awkn-investor-oca4iu7nv-awkn-team.vercel.app` | same code; behind Vercel's team SSO as well as the app's gate, so it needs a Vercel team login to open |
 
 ## Shipped
