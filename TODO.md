@@ -50,7 +50,5 @@ _None._
   and shared links unfurl bare. One `vercel deploy --prod` closes it.
 - Pick a launch-page direction (seven are in Claude Design across three rounds —
   see `docs/design-demos.md`) and rebuild it here in the app's stack.
-- The design project's contact sheet (`index.html`) still lists only rounds one
-  and two; round three is reachable by direct link but not from the sheet.
 - Reconcile `README.md`'s "75 homes" with the confirmed 80 lots. Not blocking:
   `README.md` is client-authored and was left as written.
