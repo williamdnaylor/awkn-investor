@@ -5,6 +5,7 @@ import { smsMode } from "~/server/sms";
 
 import { AllowlistSection } from "./allowlist-section";
 import { PasskeySection } from "./passkey-section";
+import { PasswordSection } from "./password-section";
 import { PhoneSection } from "./phone-section";
 import { SessionsSection } from "./sessions-section";
 import { TwoFactorSection } from "./two-factor-section";
@@ -26,11 +27,13 @@ export default async function SettingsPage() {
       <div>
         <h1 className="font-display text-3xl">Settings</h1>
         <p className="mt-2 text-sm text-ink-soft">
-          Signed in as {session.user.email}
+          Signed in as {session.user.email} ·{" "}
+          {admin ? "Administrator" : "Viewer"}
         </p>
       </div>
 
       <PasskeySection />
+      <PasswordSection />
       <TwoFactorSection smsAvailable={smsAvailable} />
       {phoneAvailable ? <PhoneSection /> : null}
       <SessionsSection currentToken={session.session.token} />

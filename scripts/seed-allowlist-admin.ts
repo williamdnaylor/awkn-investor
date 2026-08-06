@@ -11,8 +11,13 @@ import postgres from "postgres";
 
 import { allowlist } from "../src/server/db/schema";
 
-const OWNER = "mmicel583@gmail.com";
-const MEMBERS = [OWNER, "wdnaylor@gmail.com"];
+/**
+ * The two principals. Both are admins: each needs to invite investors without
+ * going through the other. Everyone they invite signs up as a `viewer` — see
+ * `admin({ defaultRole: "viewer" })` in src/server/auth/index.ts.
+ */
+const ADMINS = ["mmicel583@gmail.com", "wdnaylor@gmail.com"];
+const MEMBERS = ADMINS;
 
 async function main() {
   const url =
@@ -36,13 +41,30 @@ async function main() {
     console.log(`allowlist: ${email}`);
   }
 
-  const promoted = await db.execute(
-    sql`UPDATE awkn_investor_user SET role = 'admin' WHERE lower(email) = ${OWNER.toLowerCase()}`
+  for (const email of ADMINS) {
+    const promoted = await db.execute(
+      sql`UPDATE awkn_investor_user SET role = 'admin' WHERE lower(email) = ${email.toLowerCase()}`
+    );
+    console.log(
+      `admin promotion for ${email}: ${
+        // No row yet simply means the account hasn't been created — rerun later.
+        (promoted as unknown as { count?: number }).count ?? 0
+      } row(s)`
+    );
+  }
+
+  /**
+   * Backfill. The admin plugin's default role used to be `user`, and rows
+   * created before it was set carry NULL. Neither name means anything to the
+   * portal now — everything that isn't an admin is a viewer.
+   */
+  const backfilled = await db.execute(
+    sql`UPDATE awkn_investor_user SET role = 'viewer'
+        WHERE role IS NULL OR role = 'user'`
   );
   console.log(
-    `admin promotion for ${OWNER}: ${
-      // No row yet simply means the account hasn't been created — rerun later.
-      (promoted as unknown as { count?: number }).count ?? 0
+    `viewer backfill: ${
+      (backfilled as unknown as { count?: number }).count ?? 0
     } row(s)`
   );
 

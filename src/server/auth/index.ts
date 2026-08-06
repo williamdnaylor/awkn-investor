@@ -229,7 +229,13 @@ export const auth = betterAuth({
         otpMode() === "unavailable" ? false : checkPhoneVerification(to, code),
     }),
 
-    admin({ defaultRole: "user", adminRoles: ["admin"] }),
+    /**
+     * Two roles, no more. A `viewer` reads the decks and manages their own
+     * account; an `admin` additionally invites people. Everyone who signs up
+     * through an invitation is a viewer — admin is granted out of band by
+     * `npm run seed:admin`, so the portal has no path to escalate itself.
+     */
+    admin({ defaultRole: "viewer", adminRoles: ["admin"] }),
     haveIBeenPwned(),
 
     // MUST stay last: it flushes Better Auth's Set-Cookie headers into the
