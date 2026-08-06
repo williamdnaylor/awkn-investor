@@ -22,14 +22,12 @@ _None known._
 
 ## Tech Debt (code quality)
 
-- No automated auth evidence battery yet. Verified by hand against production:
-  deck rewrites, the `/portal` gate (both the HTML redirect and the API 401),
-  the CSRF origin check, the allowlist gate in both directions, and the
-  verification email actually leaving Resend. Still unexercised: TOTP challenge,
-  backup-code single-use, trusted-device skip, rate-limit 429, ban, HIBP
-  rejection. Those want a scripted battery (mirror mira-viz
-  `scripts/e2e-auth-battery.ts`) with `RESEND_API_KEY`/`TWILIO_*` blanked in the
-  spawned env so it can never send anything real.
+- The evidence battery (`scripts/e2e/`) needs a throwaway Postgres passed in as
+  `E2E_DATABASE_URL`; it refuses anything that looks hosted. There's no CI job
+  running it, so it only protects the code when someone remembers to run it.
+- The battery has no coverage for the SMS rung or phone enrolment — both ship
+  dark until Twilio credentials exist (see Enhancements), so there is nothing to
+  assert yet. Add it at the same time as the rung.
 - `scripts/copy-legacy.mjs` copies ~48MB of client images into `public/` on every
   build. Fine today; worth a content hash or a CDN split if build times grow.
 - Migrations run from a seat under the Neon owner role. There's no provisioning
