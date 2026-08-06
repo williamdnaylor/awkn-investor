@@ -2,7 +2,24 @@
 
 Three deliberately different directions for a single-page AWKN Residences
 launch page. They are **direction tests, not deliverables**: pick one, then it
-gets rebuilt in this repo's stack. Nothing ships to anyone from a demo file.
+gets rebuilt in this repo's stack. Nothing ships to anyone from a design URL.
+
+## Where they live
+
+In Claude Design, **not in this repo** — that is where review comments and
+iteration belong, and keeping the explorations out of the repo keeps the
+project tree to shipped code.
+
+Project: [AWKN Residences — launch pages](https://claude.ai/design/p/ea8266cd-9d43-4310-b7d3-04d1ab4c454c)
+
+| | Direction | The idea |
+|---|---|---|
+| **A** | [Register](https://claude.ai/design/p/ea8266cd-9d43-4310-b7d3-04d1ab4c454c?file=register.html) | The page *is* a register: eighty numbered lines, typographic, no photographs. Sparseness as the whole argument. |
+| **B** | [Daylight](https://claude.ai/design/p/ea8266cd-9d43-4310-b7d3-04d1ab4c454c?file=daylight.html) | Warm paper palette, editorial serif, four photographs. "Eighty lots. One standard, kept." — the argument is that nothing is tiered or upsold. |
+| **C** | [Nightfall](https://claude.ai/design/p/ea8266cd-9d43-4310-b7d3-04d1ab4c454c?file=nightfall.html) | Photographic and dark — the lamp is lit before you arrive. Carries the most emotional freight, so it's the easiest to over-promise from later. |
+
+Comment on whichever one you want to pursue; the comments come back as a work
+queue and the chosen direction gets rebuilt here on a feature branch.
 
 ## The brief, in full
 
@@ -11,33 +28,30 @@ gets rebuilt in this repo's stack. Nothing ships to anyone from a demo file.
 > available.
 
 That is the entire set of facts. The pages are deliberately sparse because
-**no amenity, price, place detail, or process may be invented.** Three rounds of
-revision went into removing things that crept in — an "invitation" CTA that
-implied a selection process, "eighty porches", a figure captioned "Site Plan"
-with a north mark and scale bar, a longevity-package cadence diagram. Anything
-that reads as a commitment the client hasn't made is a defect, not a flourish.
+**no amenity, price, place detail, or process may be invented.** Anything that
+reads as a commitment the client hasn't made is a defect, not a flourish.
 
-## The three directions
+Two things were caught and removed during generation, and are worth knowing
+about before anyone edits these pages:
 
-| | Direction | The idea | Risk |
-|---|---|---|---|
-| **A** | **Register** | The page *is* a register: eighty numbered lines, typographic, no photographs, single light theme. Sparseness as the whole argument. | Reads austere; nothing to look at if the reader wants to see the place. |
-| **B** | **Nightfall** | Photographic and dark. "Come home after the light already has" — the lamp is lit before you arrive. Copy stays grounded in what the four photos actually show. | Carries the most emotional freight, so it's the easiest to over-promise from later. |
-| **C** | **Field Manual** | Technical-document voice — document header, numbered sections, hairline SVG lot index, mono captions. Precision as the tone. | The schematic must never be mistaken for a site plan; it's captioned twice to say so. |
+- All three invented a plausible contact address (`hello@awknresidences.com`
+  and similar). Each closing CTA is now a non-link styled the same way, with an
+  HTML comment marking the address as TBC. **Do not hardcode a mailto** until
+  the client supplies one.
+- `awkn-residences/images/location-aerial-75.jpg` has "75 homes", "9.5 acres"
+  and "10 minutes from downtown" baked into the pixels, and
+  `ranch-aerial.jpg` shows a pool and sport court that aren't in the brief.
+  Neither may be used on these pages. No current page references either.
 
-## Where they are
+## Note on the source photography
 
-Not in this repo, by instruction. The HTML lives on the ops box at
-`~/.hermes/handoff/awkn-investor/demos/{a-register,b-nightfall,c-field-manual}.html`.
+The pages use the client's own photographs, loaded from the public GitHub Pages
+copies of the decks. If those are taken down (see `TODO.md`), the images in
+these mockups go with them — the chosen direction should be rebuilt against
+repo-hosted assets rather than left pointing at Pages.
 
-They are meant to live in **Claude Design**, which is where review comments and
-iteration belong. That upload is **blocked on a human step**: the
-`claude-design` MCP server needs Matthew to complete a browser authorization.
-The authorization link is on the cargo card. Once it's done, the three pages go
-up and the durable `claude.ai/design` links get recorded here and on the card.
+## Resolved
 
-## Open question before any of this reaches an investor
-
-`README.md` (client-authored) describes **75 homes** with four unit types and
-per-unit pricing. This brief says **80 lots**. Both numbers are recorded as
-given; neither was edited. Somebody has to decide which is true.
+`README.md` (client-authored) describes 75 homes; the launch brief says 80.
+Matthew confirmed **80 lots** on 2026-08-05. `README.md` is client-authored and
+was left as written.

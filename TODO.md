@@ -4,6 +4,18 @@
 
 _None._
 
+## Deprecation
+
+- **Turn off GitHub Pages** once William has signed in on Vercel and exercised
+  the full account flow. Until then it stays up as the fallback — Matthew's
+  call, deliberately. It matters because Pages is **public**: while it serves,
+  the Vercel gate protects the decks at one host and not the other, and the
+  links already in investors' inboxes point at the public one. Repoint or
+  re-send those links at the same time.
+- The launch-page mockups hotlink their photography to the Pages copies. Taking
+  Pages down breaks the images in Claude Design — rebuild the chosen direction
+  against repo-hosted assets rather than leaving it pointed there.
+
 ## Bugs (broken functionality)
 
 _None known._
@@ -30,7 +42,7 @@ _None known._
 - Light phone enrolment once a Twilio Verify service exists.
 - Verify an AWKN sender domain in Resend and replace `awkn@miraclemind.dev`.
 - Auto-deploy on push, once the Vercel GitHub App is installed on the repo.
-- Upload the three launch-page demos to Claude Design once Matthew completes the
-  MCP authorization, and record the links in `docs/design-demos.md`.
-- Resolve the 75-homes / 80-lots discrepancy between `README.md` and the launch
-  brief (see `STATUS.md`).
+- Pick a launch-page direction (three are in Claude Design — see
+  `docs/design-demos.md`) and rebuild it here in the app's stack.
+- Reconcile `README.md`'s "75 homes" with the confirmed 80 lots. Not blocking:
+  `README.md` is client-authored and was left as written.

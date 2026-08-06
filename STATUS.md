@@ -6,8 +6,8 @@ _Last updated: 2026-08-05_
 
 | Surface | URL | Notes |
 |---|---|---|
-| GitHub Pages (client's original) | `williamdnaylor.github.io/awkn-investor/` | untouched, still serving |
-| Vercel production | `awkn-investor.vercel.app` | same decks, same paths, plus `/portal` |
+| GitHub Pages (client's original) | `williamdnaylor.github.io/awkn-investor/` | untouched, still serving, still **public** — to be turned off once William is signed in on Vercel (see `TODO.md`) |
+| Vercel production | `awkn-investor.vercel.app` | same decks, same paths, plus `/portal` — the whole host is gated |
 
 ## Shipped
 
@@ -28,7 +28,8 @@ _Last updated: 2026-08-05_
   devices, DB-backed rate limiting, HIBP, email verification, admin plugin,
   invite-only allowlist, sessions manager, recovery surfaces, edge gate with the
   session-refresh bounce.
-- **Allowlist seeded**: `mmicel583@gmail.com`, `wdnaylor@gmail.com`.
+- **Allowlist seeded**: `mmicel583@gmail.com`, `wdnaylor@gmail.com` — both
+  promoted to `admin` by `npm run seed:admin` once their accounts exist.
 - **Verified against production**, not just locally: all three decks return 200
   with their original `<title>`; `/portal` 307s an HTML request to
   `/login?next=/portal` and hard-401s a non-document one; a non-allowlisted
@@ -36,8 +37,18 @@ _Last updated: 2026-08-05_
   (no session until the email link is clicked) and Resend accepted the
   verification email from `awkn@miraclemind.dev`. The probe's user, session,
   account and allowlist rows were deleted afterwards.
-- **Launch-page demos** — three directions, briefed, critiqued and revised;
-  they live outside this repo. See `docs/design-demos.md`.
+- **The whole host is gated**, not just `/portal`. The decks, their images and
+  the root page all require a session; only the surfaces you need in order to
+  *get* one are reachable signed-out. Two routing facts the gate depends on are
+  documented where they bite — the deck trailing slash (`src/proxy.ts`, not
+  `redirects()`, which would loop) and the comma in one client image filename,
+  which only survives Next's static handler when middleware leaves it encoded.
+- **Two roles.** Matthew and William are administrators and can invite people;
+  everyone they invite signs up as a `viewer`. Only admins see the team
+  section. The edge gate still never reads role — that stays in `guards.ts`.
+- **Launch-page demos** — three directions, generated in the Claude Design
+  harness and living in Matthew's account, not in this repo. Links in
+  `docs/design-demos.md`.
 
 ## Dark by design
 
@@ -55,17 +66,18 @@ _Last updated: 2026-08-05_
   only thing missing.
 - **Admin promotion** — `npm run seed:admin` promoted 0 rows because no account
   exists yet. Rerun after Matthew's first signup.
-- **Claude Design authorization** (Matthew) — the `claude-design` MCP server
-  needs a browser authorization this seat can't complete. Until it's done the
-  three launch-page demos can't be uploaded and there are no `claude.ai/design`
-  links to record. Link is on the cargo card.
+- **A direction for the launch page** (Matthew/William) — three are up in Claude
+  Design. Comment on one and it gets rebuilt here.
+- **A contact address for AWKN Residences** — all three launch pages want one
+  and none may invent it; each closing CTA is a non-link until the client
+  supplies the real inbox.
 - **Sender domain** — email goes out as `awkn@miraclemind.dev` (a verified
   Resend domain). A verified AWKN domain should replace it before invitations
   reach investors.
 
-## Known content discrepancy
+## Settled
 
-The client's `README.md` describes **75 homes** with four unit types and per-unit
-pricing. The design brief for the launch-page demos says **80 lots** with water,
-Wi-Fi and a longevity package. Both are recorded as-is; nobody's numbers were
-edited. Needs a decision from Matthew/William before either reaches investors.
+- **80 lots.** The client's `README.md` says 75 homes; Matthew confirmed 80 on
+  2026-08-05, and the launch pages use it. `README.md` is client-authored and
+  was left exactly as written — worth reconciling with William at some point,
+  but it isn't blocking anything.
