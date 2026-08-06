@@ -19,6 +19,13 @@ import { allowlist } from "../src/server/db/schema";
 const ADMINS = ["mmicel583@gmail.com", "wdnaylor@gmail.com"];
 const MEMBERS = ADMINS;
 
+/**
+ * Their allowlist rows carry `role: "admin"`, so signing up makes them one —
+ * there is no window in which they exist as viewers. The UPDATE below still
+ * runs because this script has to be correct for an account that already
+ * exists: Matthew's was created before the column did.
+ */
+
 async function main() {
   const url =
     process.env.MIGRATION_DATABASE_URL ??
@@ -36,9 +43,25 @@ async function main() {
   for (const email of MEMBERS) {
     await db
       .insert(allowlist)
-      .values({ email: email.toLowerCase(), source: "manual", addedBy: "seed" })
-      .onConflictDoNothing();
-    console.log(`allowlist: ${email}`);
+      .values({
+        email: email.toLowerCase(),
+        source: "manual",
+        addedBy: "seed",
+        role: "admin",
+      })
+      /**
+       * Upsert the role rather than skipping the row. These two addresses were
+       * seeded before the column existed, so their rows carry the `viewer`
+       * default; `onConflictDoNothing` would leave that wrong forever and the
+       * whole point of the column is that the next signup gets it right.
+       * Nothing else on the row is touched — `source` and `addedBy` still
+       * record who put them there.
+       */
+      .onConflictDoUpdate({
+        target: allowlist.email,
+        set: { role: "admin" },
+      });
+    console.log(`allowlist: ${email} (admin)`);
   }
 
   for (const email of ADMINS) {

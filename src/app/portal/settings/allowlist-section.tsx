@@ -9,6 +9,7 @@ interface Row {
   email: string;
   source: "manual" | "invite";
   addedBy: string | null;
+  role: "admin" | "viewer";
 }
 
 export function AllowlistSection({ rows }: { rows: Row[] }) {
@@ -58,10 +59,26 @@ export function AllowlistSection({ rows }: { rows: Row[] }) {
             required
           />
         </div>
+        <label className="text-sm">
+          <span className="mb-1 block text-ink-soft">Role</span>
+          <select
+            name="role"
+            defaultValue="viewer"
+            className="h-10 rounded-md border border-ink/15 bg-transparent px-3 text-sm"
+          >
+            <option value="viewer">Viewer</option>
+            <option value="admin">Administrator</option>
+          </select>
+        </label>
         <Button type="submit" disabled={pending}>
           {pending ? "Working…" : "Invite"}
         </Button>
       </form>
+      <p className="text-xs text-ink-soft">
+        An administrator can invite and remove people. The role is applied when
+        they create their account, so changing an invitation here has no effect
+        on anyone who has already signed up.
+      </p>
 
       {rows.length > 0 ? (
         <ul className="divide-y divide-ink/10">
@@ -70,6 +87,7 @@ export function AllowlistSection({ rows }: { rows: Row[] }) {
               <div className="flex-1">
                 <p className="text-sm">{r.email}</p>
                 <p className="text-xs text-ink-soft">
+                  {r.role === "admin" ? "administrator · " : ""}
                   {r.source === "invite"
                     ? `invited${r.addedBy ? ` by ${r.addedBy}` : ""}`
                     : "added directly"}

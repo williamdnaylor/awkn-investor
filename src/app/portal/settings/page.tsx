@@ -43,6 +43,7 @@ export default async function SettingsPage() {
             email: r.email,
             source: r.source,
             addedBy: r.addedBy,
+            role: r.role,
           }))}
         />
       ) : null}

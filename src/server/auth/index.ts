@@ -21,7 +21,7 @@ import {
   user,
   verification,
 } from "~/server/db/schema";
-import { isEmailAllowed } from "~/server/auth/allowlist";
+import { checkAllowlist } from "~/server/auth/allowlist";
 import { sendEmail } from "~/server/email";
 import { checkPhoneVerification, otpMode, startPhoneVerification } from "~/server/otp";
 import { isBuildPhase, isProductionRuntime } from "~/server/runtime-env";
@@ -130,17 +130,30 @@ export const auth = betterAuth({
   databaseHooks: {
     user: {
       create: {
-        // The allowlist gate. Runs before the row exists, so a rejected signup
-        // leaves nothing behind.
+        /**
+         * The allowlist gate, and the one place a role is granted at signup.
+         * Runs before the row exists, so a rejected signup leaves nothing
+         * behind.
+         *
+         * The role comes from the invitation rather than from a list of
+         * addresses in code, so promoting someone is a row and not a deploy.
+         * `role` is not in `user.additionalFields` and the admin plugin marks
+         * it `input: false`, so a client cannot send one — the only value that
+         * can reach the row is the one this hook reads out of the database.
+         */
         before: async (candidate) => {
-          const allowed = await isEmailAllowed(
+          const verdict = await checkAllowlist(
             candidate.email,
             env.ALLOWLIST_MODE
           );
-          if (!allowed) {
+          if (!verdict.allowed) {
             throw new APIError("FORBIDDEN", { message: GATE_MESSAGE });
           }
-          return { data: candidate };
+          return {
+            data: verdict.role
+              ? { ...candidate, role: verdict.role }
+              : candidate,
+          };
         },
       },
     },

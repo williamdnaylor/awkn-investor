@@ -1,0 +1,1 @@
+ALTER TABLE "awkn_investor_allowlist" ADD COLUMN "role" text DEFAULT 'viewer' NOT NULL;

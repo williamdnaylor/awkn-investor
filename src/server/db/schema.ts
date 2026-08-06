@@ -164,6 +164,17 @@ export const allowlist = createTable("allowlist", {
   email: text("email").primaryKey(),
   source: text("source", { enum: ["manual", "invite"] }).notNull(),
   addedBy: text("added_by"),
+  /**
+   * The role this address gets when it signs up, applied once by the
+   * user-create hook. It is the *invitation's* role, not the account's — the
+   * account's lives on `user.role` and is what every authorisation check reads.
+   * Editing this afterwards changes nothing for anyone who has already
+   * registered, which is deliberate: promotion and demotion are account
+   * operations, not allowlist ones.
+   */
+  role: text("role", { enum: ["admin", "viewer"] })
+    .notNull()
+    .default("viewer"),
   createdAt: timestamp("created_at", { withTimezone: true })
     .notNull()
     .defaultNow(),
