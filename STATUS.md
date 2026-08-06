@@ -31,30 +31,32 @@ _Last updated: 2026-08-06_
 - **Allowlist seeded**: `mmicel583@gmail.com`, `wdnaylor@gmail.com` — both
   promoted to `admin` by `npm run seed:admin` once their accounts exist.
 - **The whole host is gated**, verified against production. The decks, their
-  images and the root page all require a session; only the
-  surfaces you need in order to *get* one are reachable signed-out. Two routing
-  facts it depends on are documented where they bite — the deck trailing slash
+  images and the root page all require a session; only the surfaces you need in
+  order to *get* one are reachable signed-out. Two routing facts it depends on
+  are documented where they bite — the deck trailing slash
   (`src/proxy.ts`, not `redirects()`, which would loop) and the comma in one
   client image filename, which only survives Next's static handler when
   middleware leaves it encoded.
 - **Two roles.** Matthew and William are administrators and can invite people;
   everyone they invite signs up as a `viewer`. Only admins see the team
   section. The edge gate still never reads role — that stays in `guards.ts`.
-- **Launch-page demos** — three directions, generated in the Claude Design
-  harness and living in Matthew's account, not in this repo. Links in
-  `docs/design-demos.md`.
+- **Launch-page demos** — two rounds of three directions, generated in the
+  Claude Design harness by Fable 5 and living in Matthew's account, not in this
+  repo. Round two (2026-08-06) is photographic, built on the decks' own images
+  and hero film; a contact sheet links both rounds and every page's CTA is inert
+  because no contact address exists. Links in `docs/design-demos.md`.
 - **Auth evidence battery** — `scripts/e2e/`, 64 assertions, green twice in a
   row. It boots the real production build against a throwaway Postgres and
   drives real HTTP with real cryptography: a software authenticator whose ES256
   WebAuthn assertions the server verifies exactly as it would a YubiKey's, and
   an RFC 6238 TOTP generator. Covered: invite-only signup and its
-  anti-enumeration refusal, email verification, role defaults, HIBP, change
-  password, forgot/reset with single-use tokens, passkey register → sign-in →
-  forgery rejection → rename, TOTP enrol → activate → challenge, backup-code
-  single-use, trusted-device skip, session list/revoke, ban, DB-backed rate
-  limiting, and the whole-host gate. Delivery is stubbed by an allowlisted child
-  env, so it can never send real mail or SMS, and it deletes every row it
-  creates. Transcript in `.hermes/pm/evidence/`.
+  anti-enumeration refusal, email verification, role defaults, HIBP,
+  forgot/reset with single-use tokens, passkey register → sign-in → forgery
+  rejection → rename, TOTP enrol → challenge, backup-code single-use,
+  trusted-device skip, session list/revoke, ban, rate limiting, and the
+  whole-host gate. Delivery is stubbed by an allowlisted child env, so it can
+  never send real mail or SMS, and it deletes every row it creates. Transcript
+  in `.hermes/pm/evidence/`.
 - **Two defects it caught**, both fixed and re-proved by it. (1) `guards.ts`
   asked for the session without `disableCookieCache`, so the DB-backed
   authorisation layer was served the same five-minute snapshot the edge gate
@@ -63,9 +65,8 @@ _Last updated: 2026-08-06_
   The gate and Better Auth disagreed about the snapshot's cookie name (base-URL
   protocol vs `NODE_ENV`), and because the refresh route cleared the loop guard
   on success, a production build over http turned every signed-in request into
-  an infinite gate↔refresh redirect loop. The gate now asks for both names and
-  the guard survives, so a disagreement costs one round trip and then an honest
-  `/login`.
+  an infinite gate↔refresh loop. The gate now asks for both names and the guard
+  survives, so a disagreement costs one round trip and then an honest `/login`.
 
 ## Dark by design
 
@@ -88,13 +89,12 @@ _Last updated: 2026-08-06_
   transcript). Installing <https://github.com/apps/vercel> on the repo
   (William's account) makes it self-solving: pushes to `main` and `dev` would
   deploy themselves, which is also what keeps the preview current.
-- **A direction for the launch page** (Matthew/William) — three are up in Claude
-  Design. Comment on one and it gets rebuilt here.
-- **A contact address for AWKN Residences** — all three launch pages want one
-  and none may invent it; each closing CTA is a non-link until it arrives.
-- **Sender domain** — email goes out as `awkn@miraclemind.dev` (a verified
-  Resend domain); a verified AWKN domain should replace it before invitations
-  reach investors.
+- **A direction for the launch page** (Matthew/William) — six are up in Claude
+  Design across two rounds. Comment on one and it gets rebuilt here. Round two
+  borrows home specs and rents from the investor deck; confirm both before any
+  of it is public.
+- **A contact address for AWKN Residences** — every launch page wants one and
+  none may invent it; each closing CTA is inert until it arrives.
 
 Standing decisions (80 lots, the two-role model, Pages staying up, CLI deploys)
 live in `.hermes/pm/answers.md`.
